@@ -702,11 +702,6 @@ class Trainer(object):
                 logger.info('Memory usage : %s (kb)' %
                             resource.getrusage(resource.RUSAGE_SELF).ru_maxrss)
                 
-            if self.batch_counter % 100 == 0:
-                limit, stats = get_gpu_memory_usage()
-                if stats:
-                    logger.info(
-                        f"GPU Memory Usage: {stats.get('memory_usage', 0) / 1e6:.2f}MB / {limit / 1e6:.2f}MB")
             gc.collect()
             if self.batch_counter >= self.total_iterations:
                 break
